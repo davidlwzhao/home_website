@@ -1,12 +1,18 @@
+import os
 from flask import Flask, render_template
 from data import Articles
 
 articles_data = Articles()
 app = Flask(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+@app.route('/<name>')
+def hello_name(name):
+    return "Hello {}!".format(name)
+
+#@app.route('/')
+#def home():
+#    return render_template('home.html')
 
 @app.route('/about')
 def about():
